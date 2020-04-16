@@ -1,0 +1,23 @@
+{
+  "name": "abu-sayed/calculate-commission",
+  "description": "Calculate commission",
+  "type": "app",
+  "authors": [
+    {
+      "name": "Abu sayed",
+      "email": "abu.sayed.sar@gmail.com",
+      "role": "Senior Software Engineer"
+    }
+  ],
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  },
+  "require": {
+    "php": ">=7.4.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7"
+  }
+}
