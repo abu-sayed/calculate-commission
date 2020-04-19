@@ -1,7 +1,7 @@
 <?php
-namespace commission;
+namespace Commissions;
 
-use commission\ProviderInterface;
+use Commissions\ProviderInterface;
 
 class RatesProvider implements ProviderInterface
 {

@@ -1,14 +1,14 @@
 # calculate-commission
-Calculate commission
+Calculate commissions
 
-# Installing packages
-
+## Installing packages
 `docker run --rm -v $PWD:/app composer install`
 
-# Running Program
+## Generating autoload files
+`docker run --rm -v $PWD:/app composer dump-autoload`
 
+## Running program
 `docker run --rm -v $PWD:/app php:7.4.4 php ./app/src/app.php ./app/data/input.txt`
 
-# Running Tests
-
+## Running unit tests
 `docker run --rm -v $PWD:/app php:7.4.4 php ./app/vendor/bin/phpunit ./app/src/`

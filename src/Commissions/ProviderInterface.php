@@ -1,6 +1,6 @@
 <?php
 
-namespace commission;
+namespace Commissions;
 
 interface ProviderInterface
 {

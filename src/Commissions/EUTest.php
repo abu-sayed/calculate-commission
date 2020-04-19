@@ -1,8 +1,8 @@
 <?
-namespace commission;
+namespace Commission;
 
 use PHPUnit\Framework\TestCase;
-use commission\Eu;
+use Commissions\Eu;
 
 class EuTest extends TestCase
 {

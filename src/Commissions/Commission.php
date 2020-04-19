@@ -1,9 +1,8 @@
 <?php
 
-namespace commission;
+namespace Commissions;
 
-use commission\ProviderInterface;
-use commission\Eu;
+use Commissions\{ProviderInterface, Eu};
 
 class Commission
 {

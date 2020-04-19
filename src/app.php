@@ -1,21 +1,13 @@
 <?php
-namespace commission;
-
-use commission\Commission;
-use commission\BinProvider;
-use commission\RatesProvider;
-use commission\Eu;
+use Commissions\{Commission, BinProvider, RatesProvider, Eu};
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$commissionsInputPath = $argv[1];
-$binProviderBasePath  = 'https://lookup.binlist.net/';
-$ratesProviderPath    = 'https://api.exchangeratesapi.io/latest';
-$binProvider          = new BinProvider($binProviderBasePath);
-$ratesProvider        = new RatesProvider($ratesProviderPath);
+$binProvider          = new BinProvider('https://lookup.binlist.net/');
+$ratesProvider        = new RatesProvider('https://api.exchangeratesapi.io/latest');
 $commissionInstance   = new Commission($binProvider, $ratesProvider, new Eu());
 $commissions          = $commissionInstance
-  ->setTransactionsPath($commissionsInputPath)
+  ->setTransactionsPath($argv[1])
   ->calculateCommissions()
   ;
 $commissionInstance->printCommissions($commissions);

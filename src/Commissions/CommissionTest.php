@@ -1,19 +1,16 @@
 <?php
-namespace commission;
+namespace Commission;
 
 use PHPUnit\Framework\TestCase;
-use commission\BinProvider;
-use commission\RatesProvider;
-use commission\Eu;
-use commission\Commission;
+use Commissions\{BinProvider, RatesProvider, Eu, Commission};
 
 class CommissionTest extends TestCase
 {
     public function testCalculateCommissions()
     {
-        $commissionsInputPath = __DIR__ . '/../data/input.txt';
-        $binProviderBasePath  = __DIR__ . '/../data/bins/';
-        $ratesProviderPath    = __DIR__ . '/../data/rates.json';
+        $commissionsInputPath = __DIR__ . '/../../data/input.txt';
+        $binProviderBasePath  = __DIR__ . '/../../data/bins/';
+        $ratesProviderPath    = __DIR__ . '/../../data/rates.json';
         $binProvider          = new BinProvider($binProviderBasePath);
         $ratesProvider        = new RatesProvider($ratesProviderPath);
         $commissionInstance   = new Commission($binProvider, $ratesProvider, new Eu());

@@ -1,6 +1,6 @@
 <?php
 
-namespace commission;
+namespace Commissions;
 
 class Eu
 {
