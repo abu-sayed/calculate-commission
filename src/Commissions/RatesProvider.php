@@ -1,7 +1,7 @@
 <?php
 namespace Commissions;
 
-use Commissions\ProviderInterface;
+use Commissions\{ProviderInterface, NotFoundException, MalformatException};
 
 class RatesProvider implements ProviderInterface
 {
@@ -14,11 +14,27 @@ class RatesProvider implements ProviderInterface
 		return $this;
 	}
 
+	/**
+     * @throws NotFoundException if bin path does not exist 
+     * @throws MalformatException if bin is not in JSON format 
+     */
 	public function resolve($currency)
 	{
-		if (!$this->rates) {
-			$this->rates = @json_decode(file_get_contents($this->ratesPath), true)['rates'];
+		if ($this->rates) {
+			return $this->rates[$currency];
 		}
+
+		$ratesJson =  @file_get_contents($this->ratesPath);
+        if ($ratesJson === false) {
+            throw new NotFoundException("Rates not found. Path: {$this->ratesPath}");
+		}
+		
+		try {
+			$this->rates = json_decode($ratesJson, true, 512, JSON_THROW_ON_ERROR)['rates'];
+		} catch (\Exception $exception) {
+			throw new MalformatException("Malformat rates");
+		}
+
 		return $this->rates[$currency];
 	}
 }

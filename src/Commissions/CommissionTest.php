@@ -2,7 +2,7 @@
 namespace Commission;
 
 use PHPUnit\Framework\TestCase;
-use Commissions\{BinProvider, RatesProvider, Eu, Commission};
+use Commissions\{BinProvider, RatesProvider, Eu, Commission, TransactionsReader};
 
 class CommissionTest extends TestCase
 {
@@ -14,9 +14,9 @@ class CommissionTest extends TestCase
         $binProvider          = new BinProvider($binProviderBasePath);
         $ratesProvider        = new RatesProvider($ratesProviderPath);
         $commissionInstance   = new Commission($binProvider, $ratesProvider, new Eu());
+        $transactionsReader   = new TransactionsReader();
         $commissions          = $commissionInstance
-        ->setTransactionsPath($commissionsInputPath)
-        ->calculateCommissions()
+        ->calculateCommissions($transactionsReader->read($commissionsInputPath))
         ;
         $this->assertEquals(5, count($commissions));
 
