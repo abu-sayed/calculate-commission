@@ -15,11 +15,9 @@ class CommissionTest extends TestCase
         $ratesProvider        = new RatesProvider($ratesProviderPath);
         $commissionInstance   = new Commission($binProvider, $ratesProvider, new Eu());
         $transactionsReader   = new TransactionsReader();
-        $commissions          = $commissionInstance
-        ->calculateCommissions($transactionsReader->read($commissionsInputPath))
-        ;
+        $commissions          = $commissionInstance->calculateCommissions($transactionsReader->read($commissionsInputPath));
+        
         $this->assertEquals(5, count($commissions));
-
         $this->assertEquals(1, $commissions[0]);
         $this->assertEquals(0.46, $commissions[1]);
         $this->assertEquals(1.71, $commissions[2]);

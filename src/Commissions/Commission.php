@@ -19,9 +19,10 @@ class Commission
 		$this->eU            = $eU;
 	}
 
-	public function isBinEuCountry(int $bin): bool
+	private function isBinEuCountry(int $binId): bool
 	{
-		return $this->eU->isEuCountry($this->binProvider->resolve($bin));
+		$binResult = $this->binProvider->resolve($binId);
+		return $this->eU->isEuCountry($binResult->country->alpha2);
 	}
 
 	public function calculateCommissions(TransactionCollection $transactions): array

@@ -18,10 +18,10 @@ class RatesProvider implements ProviderInterface
      * @throws NotFoundException if bin path does not exist 
      * @throws MalformatException if bin is not in JSON format 
      */
-	public function resolve($currency)
+	public function resolve($currency): float
 	{
 		if ($this->rates) {
-			return $this->rates[$currency];
+			return (float) $this->rates[$currency];
 		}
 
 		$ratesJson =  @file_get_contents($this->ratesPath);
@@ -35,6 +35,6 @@ class RatesProvider implements ProviderInterface
 			throw new MalformatException("Malformat rates");
 		}
 
-		return $this->rates[$currency];
+		return (float) $this->rates[$currency];
 	}
 }

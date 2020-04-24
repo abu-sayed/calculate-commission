@@ -2,6 +2,7 @@
 namespace Commissions;
 
 use Commissions\{ProviderInterface, NotFoundException, MalformatException};
+use stdClass;
 
 class BinProvider implements ProviderInterface
 {
@@ -17,7 +18,7 @@ class BinProvider implements ProviderInterface
      * @throws NotFoundException if bin path does not exist 
      * @throws MalformatException if bin is not in JSON format 
      */
-	public function resolve($binId)
+	public function resolve($binId): stdClass
 	{
 		$binJson =  @file_get_contents($this->binPath.$binId);
         if ($binJson === false) {
@@ -25,8 +26,7 @@ class BinProvider implements ProviderInterface
         }
 		
 		try {
-			$bin = json_decode($binJson, false, 512, JSON_THROW_ON_ERROR);
-			return $bin->country->alpha2;
+			return json_decode($binJson, false, 512, JSON_THROW_ON_ERROR);
 		} catch (\Exception $exception) {
 			throw new MalformatException("Malformat bin");
 		}
